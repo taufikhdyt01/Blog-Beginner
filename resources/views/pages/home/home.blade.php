@@ -1,7 +1,7 @@
-<x-guest-layout>
+<x-user-layout>
     <div class="py-12">
         <div class="flex justify-center bg-[url(https://thewilddetectives.com/wp-content/uploads/2020/05/Reading.jpg)] h-[600px] bg-no-repeat items-center bg-center mb-5">
-            <h1 class="text-white text-3xl font-bold">
+            <h1 class="text-white text-3xl font-bold p-5">
                 Explore the World of Ideas with Our Blog WebApp
             </h1>
         </div>
@@ -26,43 +26,45 @@
                     </form>
                 </div>
                 <div class="mt-5">
-                    @forelse($articles as $article)
+                    @if(empty($articles))
+                    <div class="flex justify-center items-center p-20">
+                        <h1 class="text-3xl text-red-500">There is no article yet</h1>
+                    </div>
+                    @else
                     <div class="grid lg:grid-cols-3 grid-cols-1 gap-5">
-                        <div class="rounded-lg border border-gray-900 ">
-                            <img src="{{ $article->image }}" alt="" class="rounded-t-lg">
-                            <div class="px-4 py-2">
-                                <div class="mb-5">
-                                    <h1 class="text-xl font-semibold">{{ $article->title }}</h1>
-                                    <p>Author : {{ $article->user->name }}</p>
-                                    <p class="max-w-[50px]">
-                                        {{ substr($article->full_text, 0, 50) }}...
-                                    </p>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <p>{{ $article->created_at }}</p>
-                                    <p class="bg-gray-400 text-black px-2 py-1 rounded-md">
-                                        {{ $article->category->name }}
-                                    </p>
-                                </div>
-                                <div class="flex items-center">
-                                    <p class="text-lg">Tags : </p>
-                                    @foreach($article->tags as $tag)
-                                    <p class="bg-gray-400 text-black px-2 py-1 rounded-md mx-1">
-                                        {{ $tag->name }}
-                                    </p>
-                                    @endforeach
+                        @foreach($articles as $article)
+                            <div class="rounded-lg border border-gray-900 ">
+                                <img src="{{ $article->image }}" alt="" class="rounded-t-lg">
+                                <div class="px-4 py-2">
+                                    <div class="mb-5">
+                                        <h1 class="text-xl font-semibold">{{ $article->title }}</h1>
+                                        <p>Author : {{ $article->user->name }}</p>
+                                        <p class="max-w-[50px]">
+                                            {{ substr($article->full_text, 0, 50) }}...
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <p>{{ $article->created_at }}</p>
+                                        <p class="bg-gray-400 text-black px-2 py-1 rounded-md">
+                                            {{ $article->category->name }}
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-lg">Tags : </p>
+                                        @foreach($article->tags as $tag)
+                                        <p class="bg-gray-400 text-black px-2 py-1 rounded-md mx-1">
+                                            {{ $tag->name }}
+                                        </p>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
                         </div>
-                    </div>
-                        @empty
-                        <div class="flex justify-center items-center p-20">
-                            <h1 class="text-3xl text-red-500">There is no article yet</h1>
-                        </div>
-                        @endforelse
+                    @endif
                 </div>
                 {!! $articles->links() !!}
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-user-layout>
