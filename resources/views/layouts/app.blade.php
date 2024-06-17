@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="path/to/multiselect.css" media="screen" rel="stylesheet" type="text/css">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,5 +33,6 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="path/to/jquery.multi-select.js" type="text/javascript"></script>
     </body>
 </html>

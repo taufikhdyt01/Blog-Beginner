@@ -18,8 +18,29 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeFilter($query, array $filters = [])
+    {
+        $query->when($filters['article'] ?? false, function($query, $article) {
+            return $query->where('title', 'like', '%' . $article  .'%');
+        })->when($filters['category'] ?? false, function($query, $category) {
+            return $query->whereHas('category', function($query) use($category) {
+                return $query->where('name', 'like', '%' . $category  .'%');
+            });
+        })->when($filters['tag'] ?? false, function($query, $tag) {
+            return $query->whereHas('tags', function($query) use($tag) {
+                return $query->where('name', 'like', '%' . $tag  .'%');
+            });
+        });
+    }
+
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'article_tags');
     }
 }
