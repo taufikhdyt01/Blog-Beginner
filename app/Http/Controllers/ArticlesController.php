@@ -28,7 +28,8 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
-
+        $article->load('category', 'tags', 'user');
+        return view('pages.articles.detail', compact('article'));
     }
 
     public function store(Request $request)

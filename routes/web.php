@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ArticlesController::class)->group(function() {
         Route::get('/articles', 'index')->name('articles.show');
+        Route::get('/articles/{article}', 'show')->name('articles.detail');
         Route::get('/articles/create', 'create')->name('articles.create');
         Route::get('/articles/edit/{article}', 'edit')->name('articles.edit');
         Route::post('/articles', 'store')->name('articles.store');

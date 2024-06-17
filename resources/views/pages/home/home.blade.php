@@ -33,7 +33,8 @@
                     @else
                     <div class="grid lg:grid-cols-3 grid-cols-1 gap-5">
                         @foreach($articles as $article)
-                            <div class="rounded-lg border border-gray-900 ">
+                            <div class="rounded-lg border border-gray-900 group hover:bg-red-600 duration-300 ease-in-out hover:text-white hover:cursor-pointer"
+                            onclick="location.href='{{ route('articles.detail', $article->id) }}'">
                                 <img src="{{ $article->image }}" alt="" class="rounded-t-lg">
                                 <div class="px-4 py-2">
                                     <div class="mb-5">
@@ -45,14 +46,14 @@
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <p>{{ $article->created_at }}</p>
-                                        <p class="bg-gray-400 text-black px-2 py-1 rounded-md">
+                                        <p class="bg-red-500 text-white px-2 py-1 rounded-md group-hover:bg-white group-hover:text-red-600">
                                             {{ $article->category->name }}
                                         </p>
                                     </div>
                                     <div class="flex items-center">
                                         <p class="text-lg">Tags : </p>
                                         @foreach($article->tags as $tag)
-                                        <p class="bg-gray-400 text-black px-2 py-1 rounded-md mx-1">
+                                        <p class="bg-red-500 text-white px-2 py-1 rounded-md mx-1 group-hover:bg-white group-hover:text-red-600">
                                             {{ $tag->name }}
                                         </p>
                                         @endforeach
