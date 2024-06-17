@@ -12,5 +12,6 @@ Route::get('/admin', [PageController::class, 'admin'])->name('admin');
 Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
-    Route::resource('articles', ArticleController::class);
+    Route::get('articles', [ArticleController::class, 'manage'])->name('articles.index');
+    Route::resource('articles', ArticleController::class)->except(['index']);
 });
