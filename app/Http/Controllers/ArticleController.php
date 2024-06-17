@@ -34,6 +34,13 @@ class ArticleController extends Controller
         return view('admin.articles.create', compact('categories', 'tags'));
     }
 
+    public function crud()
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.articles.crud', compact('categories', 'tags'));
+    }
+
     public function store(Request $request)
     {
 
