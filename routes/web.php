@@ -12,6 +12,10 @@ Route::controller(PageController::class)->group(function(){
     Route::get('/about', 'about')->name('about');
 });
 
+Route::controller(ArticlesController::class)->group(function() {
+    Route::get('/articles/show/{article}', 'show')->name('articles.detail');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -32,7 +36,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ArticlesController::class)->group(function() {
         Route::get('/articles', 'index')->name('articles.show');
-        Route::get('/articles/{article}', 'show')->name('articles.detail');
         Route::get('/articles/create', 'create')->name('articles.create');
         Route::get('/articles/edit/{article}', 'edit')->name('articles.edit');
         Route::post('/articles', 'store')->name('articles.store');
